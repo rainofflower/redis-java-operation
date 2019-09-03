@@ -1,4 +1,4 @@
-package com.yanghui.study.jedis;
+package study.jedis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;

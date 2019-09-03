@@ -1,4 +1,4 @@
-package com.yanghui.study.lettuce;
+package study.lettuce;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

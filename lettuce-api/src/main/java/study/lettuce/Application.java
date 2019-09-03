@@ -1,4 +1,4 @@
-package com.yanghui.study.lettuce;
+package study.lettuce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

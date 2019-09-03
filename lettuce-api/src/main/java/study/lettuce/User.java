@@ -1,4 +1,4 @@
-package com.yanghui.study.lettuce;
+package study.lettuce;
 
 import lombok.Getter;
 import lombok.Setter;

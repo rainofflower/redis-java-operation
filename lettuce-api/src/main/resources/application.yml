@@ -11,4 +11,5 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
-    timeout: 1000
+
+#    timeout: 15000  #lettuce默认的超时时间为60s,源码见LettuceClientConfigurationBuilder
