@@ -1,9 +1,11 @@
 spring:
   redis:
-    database: 12
-    host: 10.10.203.13
-    port: 6379
-    password: Jht123456
+    cluster:
+      nodes: 192.168.43.151:7001,192.168.43.151:7002,192.168.43.151:7003,192.168.43.151:7004,192.168.43.151:7005,192.168.43.151:7006
+      timeout: 1000
+      max-redirects: 3
+    database: 0
+    password: 888888
     encode: utf-8
     lettuce:
       pool:
@@ -11,5 +13,4 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
-
 #    timeout: 15000  #lettuce默认的超时时间为60s,源码见LettuceClientConfigurationBuilder

@@ -30,8 +30,8 @@ public class ApplicationTests {
     @Test
     public void redisTest() {
         // redis存储数据
-        String key = "name";
-//        redisTemplate.opsForValue().set(key, "lalala");
+        String key = "address";
+        redisTemplate.opsForValue().set(key, "深圳图书馆");
 //        // 获取数据
         String value = (String) redisTemplate.opsForValue().get(key);
 //        if(value == null){
