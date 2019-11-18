@@ -59,9 +59,9 @@ public class ApplicationTests {
         redisTemplate.opsForList().rightPushAll(listKey,1,2,1,5);
         redisTemplate.opsForList().rightPush(listKey,3);
         User user = new User();
-        user.setUsername("lalala");
+        user.setUsername("hahaha");
         user.setSex(1);
-        user.setAge(18);
+        user.setAge(23);
         user.setId(1L);
         redisTemplate.opsForList().rightPush(listKey,user);
         List list = redisTemplate.opsForList().range(listKey, 0, -1);
