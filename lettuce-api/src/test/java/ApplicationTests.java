@@ -1,4 +1,3 @@
-import ch.qos.logback.core.util.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
 import study.lettuce.Application;
 import study.lettuce.User;
@@ -9,12 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.io.FileNotFoundException;
+import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -28,18 +26,47 @@ public class ApplicationTests {
      * String
      */
     @Test
-    public void redisTest() {
-        // redis存储数据
-        String key = "address";
-        redisTemplate.opsForValue().set(key, "深圳图书馆");
-//        // 获取数据
-        String value = (String) redisTemplate.opsForValue().get(key);
-//        if(value == null){
-//            System.out.println("缓存中key为" + key + "的值为null");
-//        }
-        System.out.println("获取缓存中key为" + key + "的值为：" + value);
-//        redisTemplate.expire(key,5,TimeUnit.SECONDS);
+    public void redisTest() throws FileNotFoundException {
+
+        redisTemplate.opsForValue().set("aa",10);
+        //订阅redis channel
+        //业务处理
+       redisTemplate.opsForHash().put("key1","color","red");
+        redisTemplate.opsForHash().put("key1","name","bwm");
+        redisTemplate.opsForHash().get("key1","color");
+//        String installTest = "installTest1";
+////        redisTemplate.opsForValue().set(installTest,false);
+////        Boolean flag = (Boolean)redisTemplate.opsForValue().get(installTest);
+////        if(flag != null && flag){
+////            System.out.println("真");
+////        }else{
+////            System.out.println("假");
+////        }
+////        System.out.println(flag);
 //
+//
+//        Boolean flag = (Boolean) redisTemplate.opsForValue().get(installTest);
+//        if(flag == null){
+//            flag = true;
+//            redisTemplate.opsForValue().set(installTest, flag);
+//        }
+//        System.out.println(flag);
+        // redis存储数据
+//        String key = "address";
+//        redisTemplate.opsForValue().set(key, "深圳图书馆");
+////        // 获取数据
+//        String value = (String) redisTemplate.opsForValue().get(key);
+////        if(value == null){
+////            System.out.println("缓存中key为" + key + "的值为null");
+////        }
+//        System.out.println("获取缓存中key为" + key + "的值为：" + value);
+//        String sessionId = UUID.randomUUID().toString().replaceAll("-","");
+//        DistributedSession distributedSession = new DistributedSession(sessionId, node.getId(), "1");
+//        redisTemplate.opsForValue().set(sessionId, distributedSession, 2, TimeUnit.MINUTES);
+//        DistributedSession o = (DistributedSession) redisTemplate.opsForValue().get(sessionId);
+//        System.out.println(o);
+//        redisTemplate.expire(key,5,TimeUnit.SECONDS);
+//88
 //        User user = new User();
 //        user.setUsername("lalala");
 //        user.setSex(18);
@@ -48,6 +75,17 @@ public class ApplicationTests {
 //        redisTemplate.opsForValue().set(userKey, user);
 //        User newUser = (User) redisTemplate.opsForValue().get(userKey);
 //        System.out.println("获取缓存中key为" + userKey + "的值为：" + newUser);
+//        String expireKey = "expire";
+//        redisTemplate.opsForValue().set(expireKey, "test-expire", 30, TimeUnit.SECONDS);
+//        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(25));
+//        Object result1 = redisTemplate.opsForValue().get(expireKey);
+//        log.info("是否为null：{}",result1 == null);
+//        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(5));
+//        Object result2 = redisTemplate.opsForValue().get(expireKey);
+//        log.info("是否为null：{}",result2 == null);
+//        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(1));
+//        Object result3 = redisTemplate.opsForValue().get(expireKey);
+//        log.info("是否为null：{}",result3 == null);
     }
 
     /**
@@ -59,10 +97,7 @@ public class ApplicationTests {
         redisTemplate.opsForList().rightPushAll(listKey,1,2,1,5);
         redisTemplate.opsForList().rightPush(listKey,3);
         User user = new User();
-        user.setUsername("hahaha");
-        user.setSex(1);
-        user.setAge(23);
-        user.setId(1L);
+
         redisTemplate.opsForList().rightPush(listKey,user);
         List list = redisTemplate.opsForList().range(listKey, 0, -1);
         for(Object i : list){

@@ -1,5 +1,6 @@
 package study.lettuce;
 
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -25,8 +26,8 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(lettuceConnectionFactory);
 
-        //使用FastJson2JsonRedisSerializer来序列化和反序列化redis的value值
-        FastJson2JsonRedisSerializer<Object> serializer = new FastJson2JsonRedisSerializer<>(Object.class);
+        //使用 GenericFastJsonRedisSerializer 来序列化和反序列化redis的value值
+        GenericFastJsonRedisSerializer serializer = new GenericFastJsonRedisSerializer();
 
         template.setValueSerializer(serializer);
         //使用StringRedisSerializer来序列化和反序列化redis的key值
